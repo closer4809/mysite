@@ -53,11 +53,6 @@ public class UserVo {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
-	@Override
-	public String toString() {
-		return "UserVo [id=" + id + ", pw=" + pw + ", name=" + name + ", gender=" + gender + "]";
-	}
 	
 	 
 	//일반
