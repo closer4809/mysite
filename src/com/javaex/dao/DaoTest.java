@@ -6,10 +6,11 @@ public class DaoTest {
 
 	public static void main(String[] args) {
 
-		UserVo userVo = new UserVo("aaaa", "1234", "이효리", "female");
+		
 		
 		UserDao userDao = new UserDao();
-		userDao.userInsert(userVo);
+		UserVo userVo = userDao.getUser("asdf", "1234");
+		System.out.println(userVo);
 
 	}
 
