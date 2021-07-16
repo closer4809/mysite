@@ -97,15 +97,45 @@ public class UserController extends HttpServlet {
     		session.invalidate();
     		
     		WebUtil.redirect(request, response, "/mysite/main");
-    		
-                  
-            //리다이렉트 -로그인폼 페이지
-          
-         }
-    	}	
-    	
-
+    	}else if("modifyForm".equals(action)) {
+			System.out.println("[UserController.modifyForm]");
+			
+			/*
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			int no = authUser.getNo();
+			
+			UserDao userDao = new UserDao();
+			UserVo userVo = userDao.getUser(no);
+			
+			request.setAttribute("uVo", userVo);
+			*/
+			
+			WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
+    	}else if("modify".equals(action)) {
+			System.out.println("[UserController.modify]");
+			
+			
+			HttpSession session = request.getSession();
+			int no = ((UserVo)session.getAttribute("authUser")).getNo();
+			String password = request.getParameter("password");
+			String name = request.getParameter("name");
+			String gender = request.getParameter("gender");
+			
+			UserVo userVo = new UserVo(no,password, name, gender);
+			
+			UserDao userDao = new UserDao();
+			userDao.modifyUser(userVo);
+			
+			((UserVo)session.getAttribute("authUser")).setName(name);
+			
+			
+			WebUtil.redirect(request, response, "/mysite/main");
+		}
     
+    	
+	}
+    	
     
 
 	
