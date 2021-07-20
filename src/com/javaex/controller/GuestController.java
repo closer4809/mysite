@@ -49,7 +49,7 @@ public class GuestController extends HttpServlet {
 		
 		}else if("add".equals(action)) {
 			System.out.println("[등록]");
-			GuestbookDao guestbookDao = new GuestbookDao();
+			
 			request.setCharacterEncoding("UTF-8");
 			String name = request.getParameter("name");
 			String password = request.getParameter("pass");
@@ -57,6 +57,7 @@ public class GuestController extends HttpServlet {
 			
 			GuestbookVo guestbookVo = new GuestbookVo(name, password, content);
 			
+			GuestbookDao guestbookDao = new GuestbookDao();
 			guestbookDao.guestbookInsert(guestbookVo);
 			System.out.println(guestbookVo);
 			

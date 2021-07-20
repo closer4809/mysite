@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
-<%
-	String no = request.getParameter("no");
 
-	System.out.println(no);
-%>
 
 <!DOCTYPE html>
 <html>
@@ -20,7 +17,7 @@
 <body>
 	<div id="wrap">
 
-		<jsp:include page="/WEB-INF/views/includes/header.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 		<!-- //header -->
 
 
@@ -71,7 +68,7 @@
 						</table>
 						<a href="/mysite/gbc?action=list">메인으로 돌아가기</a>
 						<br>
-						<input type='hidden' name="no" value="<%=no%>">
+						<input type='hidden' name="no" value="${param.no}">
 						<input type="hidden" name="action" value="delete">
 					</form>
 					
@@ -83,7 +80,7 @@
 		</div>
 		<!-- //container  -->
 		
-		<jsp:include page="/WEB-INF/views/includes/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 		<!-- //footer -->
 
 	</div>

@@ -5,6 +5,9 @@
 <%@ page import="com.javaex.vo.UserVo" %>
 <%@ page import="java.util.List" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <%
 		
 	/* 로그인 관련 */
@@ -35,7 +38,7 @@
 	<div id="wrap">
 
 
-		<jsp:include page="/WEB-INF/views/includes/header.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	
 		<!-- //header -->
 
@@ -97,7 +100,7 @@
 					
 					
 					
-				<% for(GuestbookVo guestbookVo :guestbookList){ %>	
+				<c:forEach items = "${gList }" var = "guestVo"  >
 					<table class="guestRead">
 						<colgroup>
 							<col style="width: 10%;">
@@ -106,19 +109,19 @@
 							<col style="width: 10%;">
 						</colgroup>
 						<tr>
-							<td><%=guestbookVo.getNo() %></td>
-							<td><%=guestbookVo.getName() %></td>
-							<td><%=guestbookVo.getRegDate() %></td>
-							<td><a href="/mysite/gbc?action=dform&no=<%=guestbookVo.getNo()%>">삭제</a></td>
+							<td>[${guestVo.no }]</td>
+							<td>${guestVo.name }</td>
+							<td>${guestVo.regDate }</td>
+							<td><a href="/mysite/gbc?action=dform&no=${guestVo.no }">삭제</a></td>
 					
 						</tr>
 						<tr>
-							<td colspan=4 class="text-left"><%=guestbookVo.getContent() %></td>
+							<td colspan=4 class="text-left">${guestVo.content}</td>
 						</tr>
 					</table>
-				<% 
-				}
-				%>
+					<br>
+					
+				</c:forEach>
 					
 					
 				
@@ -132,7 +135,7 @@
 			<!-- //content  -->
 		</div>
 		<!-- //container  -->
-		<jsp:include page="/WEB-INF/views/includes/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 		<!-- //footer -->
 	</div>
 	<!-- //wrap -->

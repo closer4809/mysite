@@ -56,6 +56,8 @@ public class UserController extends HttpServlet {
     		int count = userDao.userInsert(userVo);
     		//포워드
     		
+    		
+    		
             WebUtil.forward(request, response, "/WEB-INF/views/user/joinOk.jsp");
     		
     	}else if("loginForm".equals(action)) {
@@ -75,10 +77,11 @@ public class UserController extends HttpServlet {
     		UserDao uesrDao = new UserDao();
     		UserVo userVo = uesrDao.getUser(id, password);
     		
+    		
     		if(userVo !=null) {
 	    		//성공일때(아이디 비번 맞을때) 세션에 저장
 	    		HttpSession session = request.getSession();
-	    		session.setAttribute("authUser", userVo);
+	    		session.setAttribute("authUser", userVo);                                                     
 	    	
 	    		//리다이렉트 --> 실패일때 작성해야함!
 	    		WebUtil.redirect(request, response, "/mysite/main");
@@ -94,22 +97,24 @@ public class UserController extends HttpServlet {
     		
     		HttpSession session = request.getSession();
     		session.removeAttribute("authUser");
+    		
+    		//세션에 할당되는 메모리를 삭제.
     		session.invalidate();
     		
     		WebUtil.redirect(request, response, "/mysite/main");
     	}else if("modifyForm".equals(action)) {
 			System.out.println("[UserController.modifyForm]");
 			
-			/*
+			
 			HttpSession session = request.getSession();
 			UserVo authUser = (UserVo)session.getAttribute("authUser");
 			int no = authUser.getNo();
 			
 			UserDao userDao = new UserDao();
-			UserVo userVo = userDao.getUser(no);
+			UserVo modifyUserVo = userDao.getUser(no);
 			
-			request.setAttribute("uVo", userVo);
-			*/
+			request.setAttribute("modifyUser", modifyUserVo);
+			
 			
 			WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
     	}else if("modify".equals(action)) {
@@ -126,6 +131,7 @@ public class UserController extends HttpServlet {
 			
 			UserDao userDao = new UserDao();
 			userDao.modifyUser(userVo);
+			
 			
 			((UserVo)session.getAttribute("authUser")).setName(name);
 			

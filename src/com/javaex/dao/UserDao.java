@@ -205,8 +205,7 @@ public class UserDao {
 				String query = "";
 				query += " select no, id, password, name, gender ";
 				query += " from users ";
-				query += " where id = ? ";
-				query += " and password = ? ";
+				query += " where no = ? ";
 
 				pstmt = conn.prepareStatement(query);
 				pstmt.setInt(1, uNo);
